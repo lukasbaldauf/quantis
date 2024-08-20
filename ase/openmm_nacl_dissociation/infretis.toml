@@ -1,0 +1,43 @@
+# infretis config
+
+[dask]
+workers = 4
+wmdrun = [0,0,0,0,0,0,0,0,0]
+
+[simulation]
+interfaces = [2.8, 3.0, 3.2, 3.4, 3.6, 3.8, 4.0, 7.0] # 3.0, 3.2, 3.4, 3.6, 3.645, 7.0] #3.0, 3.2, 3.4, 3.6, 3.8, 4.1, 7.0]
+steps = 10000
+seed = 0
+load_dir = 'load'
+shooting_moves = ['sh','sh','wf','wf','wf','wf','wf','wf','wf','wf','wf','wf','wf']
+n_jumps = 2
+interface_cap = 4.5
+
+
+[simulation.tis_set]
+maxlength = 50000
+allowmaxlength = false
+zero_momentum = true # momentum true
+
+[engine]
+class = 'ase'
+engine = 'ase'
+input_path = 'openmm_input'
+temperature = 300
+timestep = 0.5
+subcycles = 20
+fixcm = true
+[engine.calculator_settings]
+module = "openmmcalculator.py"
+class = "ForceMixingCalc"
+
+[orderparameter]
+class = 'Distance'
+index = [ 0, 1]
+periodic = true
+
+[output]
+data_dir = "./"
+screen = 1
+pattern = false
+delete_old = false

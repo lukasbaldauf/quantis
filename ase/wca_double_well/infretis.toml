@@ -1,0 +1,46 @@
+# infretis config
+
+[dask]
+workers = 10
+wmdrun = ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0',]
+
+[simulation]
+#interfaces = [0.81, 0.83, 0.85, 0.87, 0.89, 0.91, 0.93, 1.3]
+interfaces = [0.8559, 0.8609, 0.8654, 0.8697, 0.8739, 0.8782, 0.8824, 0.8863, 0.8900, 0.8937, 0.8975, 0.9013, 0.9053, 0.9093, 0.9132, 0.9171, 0.9210, 0.9253, 1.3]
+steps = 100000
+seed = 0
+load_dir = 'load'
+shooting_moves = ['sh','sh', 'wf', 'wf', 'wf', 'wf', 'wf', 'wf', 'wf', 'wf', 'wf', 'wf', 'wf', 'wf', 'wf', 'wf', 'wf', 'wf', 'wf', 'wf', 'wf']
+
+
+[simulation.tis_set]
+maxlength = 20000
+allowmaxlength = false
+zero_momentum = false
+n_jumps = 1
+interface_cap = 0.93
+
+
+[engine]
+class = 'ase'
+engine = 'ase'
+input_path = ''
+temperature = 300
+timestep = 0.5
+subcycles = 1
+[engine.calculator_settings]
+module = "get_calculator.py"
+class = "ForceMixingCalc"
+
+[orderparameter]
+class = "MaxDistance"
+module = "orderp.py"
+#class = "distance"
+#index = [0, 1]
+#periodic = true
+
+[output]
+data_dir = "./" # where to store infretis_data.txt
+screen = 1 # how often to print to sim.log
+pattern = false # how often we print info of which worker is in which ensemble at any time to pattern.txt
+delete_old = true # delete old accepted trajectories (e.g. .trr or .xyz files)
