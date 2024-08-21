@@ -15,6 +15,8 @@ class OpenMMCalculator(Calculator):
     def __init__(self, simulation):
         super().__init__()
         self.context = simulation.context
+        pf = openmm.Platform.getPlatformByName("CPU")
+        print("Num. threads =", pf.getPropertyValue(self.context, "Threads"))
         self.implemented_properties = ["energy", "forces", "stress"]
 
     def calculate(self, atoms, properties = None, system_changes = all_changes):
@@ -48,15 +50,15 @@ class Calculator0(OpenMMCalculator):
     Same as system1 but all water parameters are scaled by 1.1
     """
     def __init__(self):
-        self.xml_file = "openmm_input/system0.xml"
-        self.pdb_file = "openmm_input/topology.pdb"
+        self.xml_file = "openmm_input2/system0.xml"
+        self.pdb_file = "openmm_input2/topology.pdb"
         super().__init__(get_simulation(self.xml_file, self.pdb_file))
 
 
 class Calculator1(OpenMMCalculator):
     def __init__(self):
-        self.xml_file = "openmm_input/system1.xml"
-        self.pdb_file = "openmm_input/topology.pdb"
+        self.xml_file = "openmm_input2/system1.xml"
+        self.pdb_file = "openmm_input2/topology.pdb"
         super().__init__(get_simulation(self.xml_file, self.pdb_file))
 
 class DPSwitching:
