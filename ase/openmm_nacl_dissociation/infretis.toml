@@ -22,14 +22,16 @@ zero_momentum = true # momentum true
 [engine]
 class = 'ase'
 engine = 'ase'
-input_path = 'openmm_input2'
+input_path = 'openmm_input'
 temperature = 300
 timestep = 0.5
 subcycles = 20
 fixcm = true
 [engine.calculator_settings]
 module = "openmmcalculator.py"
-class = "Calculator1"
+class = "ForceMixingCalc"
+intf0 = 2.8
+intf_1 = 2.7
 
 [orderparameter]
 class = 'Distance'

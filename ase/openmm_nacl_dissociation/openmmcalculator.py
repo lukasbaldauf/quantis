@@ -9,8 +9,10 @@ class OpenMMCalculator(Calculator):
     Minimalistic OpenMM calculator.
 
     To control the number of cpus, run
-
         export OPENMM_NUM_THREADS=1
+
+    To choose the platform, run
+        export OPENMM_DEFAULT_PLATFORM={CPU, CUDA,...,}
     """
     def __init__(self, simulation):
         super().__init__()
@@ -47,7 +49,7 @@ def get_simulation(system_xml, topology_pdb):
 
 class Calculator0(OpenMMCalculator):
     """
-    Same as system1 but all water parameters are scaled by 1.1
+    Calculator using the spce water model.
     """
     def __init__(self):
         self.xml_file = "openmm_input/system0.xml"
@@ -56,6 +58,9 @@ class Calculator0(OpenMMCalculator):
 
 
 class Calculator1(OpenMMCalculator):
+    """
+    Calculator using the tip3p water model.
+    """
     def __init__(self):
         self.xml_file = "openmm_input/system1.xml"
         self.pdb_file = "openmm_input/topology.pdb"
@@ -72,16 +77,18 @@ class DPSwitching:
 
 class ForceMixingCalc(Calculator):
     """
-    Mix two calculators.
+    Force mixing calculator.
     """
-    def __init__(self):
+    def __init__(self, intf0, intf_1):
         super().__init__()
         self.implemented_properties = ["energy", "forces", "stress"]
         self.mm_calc = Calculator0()
         self.dft_calc = Calculator1()
-        self.intf0 = 2.8
-        self.intf_1 = 2.7
+        self.intf0 = intf0
+        self.intf_1 = intf_1
         self.Forcemixing = DPSwitching(self.intf0, self.intf_1)
+        print(self.__doc__)
+        print(f"intf0 {intf0} intf_1 {intf_1}")
 
 
 
