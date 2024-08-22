@@ -9,7 +9,7 @@ class OpenMMCalculator(Calculator):
     Minimalistic OpenMM calculator.
 
     To control the number of cpus, run
-        export OPENMM_NUM_THREADS=1
+        export OPENMM_CPU_THREADS=1
 
     To choose the platform, run
         export OPENMM_DEFAULT_PLATFORM={CPU, CUDA,...,}
