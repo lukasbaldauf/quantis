@@ -192,8 +192,6 @@ class ForceMixingCalc(Calculator):
         if order < self.intf_1:
             e, f = forces_and_energy_harmonic(dist_matrix, distances, N,
                     k = self.k, r0 = self.r0)
-            delta_f = 0.0
-            rho = 1.0
 
         elif order < self.intf0:
             e0, f0 = forces_and_energy_harmonic(dist_matrix, distances, N,
@@ -205,15 +203,12 @@ class ForceMixingCalc(Calculator):
             rho = self.Forcemixing.mix(order)
             e = e1
             f = rho * f0 + (1 - rho) * f1
-            delta_f = f1 - f0
 
         else:
             e, f = forces_and_energy_DW(dist_matrix, distances, N,
                     a = self.a, b = self.b, c = self.c, shift = self.shift)
-            delta_f = 0.0
-            rho = 0.0
 
-        self.results = {"energy":e + elj, "forces":f + flj, "stress":np.zeros(6), "delta_f":delta_f, "rho":rho}
+        self.results = {"energy":e + elj, "forces":f + flj, "stress":np.zeros(6)}
 
 class HarmonicCalc(Calculator):
     def __init__(self):
