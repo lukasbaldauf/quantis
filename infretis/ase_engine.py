@@ -52,7 +52,7 @@ class ASEEngine(EngineBase):
             "fixcm": fixcm,
         }
         self.kb = 8.61733326e-5  # eV/K
-        self.beta = 1 / (self.temperature * self.kb)
+        self._beta = 1 / (self.temperature * self.kb)
         print(fixcm)
 
     def _extract_frame(self, traj_file: str, idx: int, out_file: str) -> None:
