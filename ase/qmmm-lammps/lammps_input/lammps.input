@@ -1,0 +1,24 @@
+units real
+atom_style full
+
+dimension 3
+boundary p p p
+
+bond_style hybrid harmonic
+angle_style hybrid harmonic
+dihedral_style hybrid multi/harmonic charmm
+special_bonds lj 0.0 0.0 0.5 coul 0.0 0.0 0.5
+
+read_data lammps_input/lammps.data # may need to be updated
+
+pair_style lj/cut/coul/long 9.0 9.0
+pair_modify tail yes
+kspace_style pppm 1e-5
+
+pair_coeff 1 1   0.0760000   3.5500000
+pair_coeff 2 2   0.0000000   0.0000000
+pair_coeff 3 3   0.1520999   3.1506100
+
+pair_modify mix geometric
+
+thermo_style custom ebond eangle edihed eimp epair evdwl ecoul elong etail pe
