@@ -8,7 +8,7 @@ from lammps_xtb_qmmmcalc import QMMMCalc
 from ase.md import VelocityVerlet
 from ase import units
 
-atoms = read("atoms.traj")
+atoms = read("atoms.traj") # also contains unit cell, which doesn't change in lammpscalc
 atoms.calc = QMMMCalc()
 
 dyn = VelocityVerlet(atoms, dt = 0.5*units.fs)
