@@ -2,7 +2,7 @@
 export OMP_NUM_THREADS=1
 ```
 
-```
+```python
 from ase.io import read
 from lammps_xtb_qmmmcalc import QMMMCalc
 from ase.md import VelocityVerlet
