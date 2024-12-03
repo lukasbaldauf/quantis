@@ -1,0 +1,18 @@
+runtime defaults.vim
+set title
+"sets linenumbers on the left and colors them grey
+set number relativenumber
+highlight LineNr ctermfg=grey
+
+"highlights eol whitespaces
+:highlight ExtraWhitespace ctermbg=red guibg=red
+:match ExtraWhitespace /\s\+$/
+"set list listchars=tab:.\ , nbsp:⎵,
+set list listchars=tab:t\ ,nbsp:\X
+
+"Run python scripts with <F9> or interactively with <F6>
+autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+
+autocmd FileType python map <buffer> <F6> :w<CR>:exec '!ipython -i' shellescape(@%, 1)<CR>
+autocmd FileType python imap <buffer> <F6> <esc>:w<CR>:exec '!python3 -i' shellescape(@%, 1)<CR>
