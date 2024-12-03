@@ -21,7 +21,7 @@ class OpenMMCalculator(Calculator):
         print("Num. threads =", pf.getPropertyValue(self.context, "Threads"))
         self.implemented_properties = ["energy", "forces", "stress"]
 
-    def calculate(self, atoms, properties = None, system_changes = all_changes):
+    def calculate(self, atoms = None, properties = None, system_changes = all_changes):
         self.context.setPositions(atoms.positions/10)
         self.context.setPeriodicBoxVectors(*atoms.cell.array/10)
         state = self.context.getState(getEnergy=True, getForces=True)
@@ -93,6 +93,7 @@ class ForceMixingCalc(Calculator):
 
 
     def calculate(self, atoms, properties = None, system_changes = all_changes):
+        Calculator.calculate(self, atoms, properties, system_changes)
         # we need to calculate the order parameter at every step
         order = atoms.calculate_order(atoms.system, xyz=atoms.positions, vel=atoms.get_velocities(), box=atoms.cell.diagonal(),)[0]
 
