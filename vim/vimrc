@@ -16,3 +16,6 @@ autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellesca
 
 autocmd FileType python map <buffer> <F6> :w<CR>:exec '!ipython -i' shellescape(@%, 1)<CR>
 autocmd FileType python imap <buffer> <F6> <esc>:w<CR>:exec '!python3 -i' shellescape(@%, 1)<CR>
+
+"ctags -R -f tags/infretis_tags /home/lukas/software/infretis/infretis/
+set tags+=~/.vim/tags/infretis_tags
