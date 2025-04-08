@@ -1,0 +1,45 @@
+[runner]
+workers = 1
+wmdrun = [0,]
+
+[simulation]
+interfaces = [3.36, 12.00]
+steps = 20
+seed = 0
+load_dir = 'load'
+shooting_moves = ['sh','sh']
+
+[simulation.tis_set]
+maxlength = 2000
+allowmaxlength = false
+zero_momentum = true # momentum true
+n_jumps = 3
+interface_cap = 5.4
+
+[engine]
+class = 'amber'
+engine = 'amber'
+timestep = 0.0002
+input_path = 'amber_input'
+sander = 'sander'
+subcycles = 10
+temperature = 300
+
+[orderparameter]
+class = 'Distance'
+index = [ 0, 1]
+periodic = true
+
+[output]
+data_dir = "./"
+screen = 1
+pattern = 1
+delete_old = false
+
+[infinit]
+pL = 0.3
+steps_per_iter = [10]
+nskip = 0
+cstep = -1
+initial_conf = "amber_input/amber.restrt"
+lamres = 0.001
